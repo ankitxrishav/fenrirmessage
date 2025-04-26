@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .wolf-primary { fill: #111827; }
+    .wolf-secondary { fill: #1F2937; }
+    .wolf-accent { fill: #6D28D9; }
+    .wolf-highlight { fill: #8B5CF6; }
+    .wolf-glow { fill: #C4B5FD; }
+  </style>
+  
+  <!-- Circle behind wolf head -->
+  <circle cx="200" cy="200" r="180" fill="#1E1E1E" opacity="0.7"/>
+  
+  <!-- Cross elements in background -->
+  <path d="M60,60 L80,80 M80,60 L60,80" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M320,60 L340,80 M340,60 L320,80" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M60,320 L80,340 M80,320 L60,340" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M320,320 L340,340 M340,320 L320,340" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M200,40 L200,60 M190,50 L210,50" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M200,340 L200,360 M190,350 L210,350" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M40,200 L60,200 M50,190 L50,210" stroke="#444" stroke-width="2" opacity="0.3"/>
+  <path d="M340,200 L360,200 M350,190 L350,210" stroke="#444" stroke-width="2" opacity="0.3"/>
+  
+  <!-- Wolf face outer shape -->
+  <path class="wolf-primary" d="M200,80
+    C240,80 280,100 300,130
+    C320,160 320,190 300,220
+    C280,250 260,260 240,270
+    C220,280 200,280 180,270
+    C160,260 140,250 120,220
+    C100,190 100,160 120,130
+    C140,100 160,80 200,80Z" />
+  
+  <!-- Wolf ears -->
+  <path class="wolf-primary" d="M140,110 L120,70 L160,80 Z" />
+  <path class="wolf-primary" d="M260,110 L280,70 L240,80 Z" />
+  
+  <!-- Wolf forehead marking -->
+  <path class="wolf-primary" d="M200,130 
+    L220,100 L240,115 
+    L250,100 L240,90
+    L220,85 L200,90
+    L180,85 L160,90
+    L150,100 L160,115
+    L180,100 Z" />
+  
+  <!-- Wolf eye sockets -->
+  <path class="wolf-secondary" d="M160,150 
+    C150,140 150,130 160,120
+    C170,110 185,110 195,120
+    C205,130 205,140 195,150
+    C185,160 170,160 160,150Z" />
+    
+  <path class="wolf-secondary" d="M240,150 
+    C230,140 230,130 240,120
+    C250,110 265,110 275,120
+    C285,130 285,140 275,150
+    C265,160 250,160 240,150Z" />
+  
+  <!-- Wolf eyes -->
+  <ellipse class="wolf-highlight" cx="177.5" cy="135" rx="15" ry="12" opacity="0.9" />
+  <ellipse class="wolf-highlight" cx="222.5" cy="135" rx="15" ry="12" opacity="0.9" />
+  <ellipse fill="white" cx="177.5" cy="130" rx="5" ry="3" />
+  <ellipse fill="white" cx="222.5" cy="130" rx="5" ry="3" />
+  
+  <!-- Wolf snout and nose -->
+  <path class="wolf-secondary" d="M200,190
+    L220,170 L230,180
+    L220,190 L230,200
+    L220,210 L200,220
+    L180,210 L170,200
+    L180,190 L170,180
+    L180,170 Z" />
+    
+  <path class="wolf-accent" d="M200,160 L210,170 L200,180 L190,170 Z" />
+  
+  <!-- Wolf mouth with teeth -->
+  <path class="wolf-primary" d="M170,210 
+    C180,220 190,225 200,225
+    C210,225 220,220 230,210
+    L225,240 L200,250 L175,240 Z" />
+    
+  <path fill="white" d="M190,225 L187,235 L193,235 Z" />
+  <path fill="white" d="M210,225 L213,235 L207,235 Z" />
+  
+  <!-- Wolf mane/fur details -->
+  <path class="wolf-primary" d="M160,140 L140,130 L130,115 L140,125 L130,110 L145,120 Z" />
+  <path class="wolf-primary" d="M240,140 L260,130 L270,115 L260,125 L270,110 L255,120 Z" />
+  <path class="wolf-primary" d="M150,180 L120,170 L100,150 L110,165 L95,140 L115,160 Z" />
+  <path class="wolf-primary" d="M250,180 L280,170 L300,150 L290,165 L305,140 L285,160 Z" />
+  
+  <!-- Ring with VII -->
+  <circle cx="200" cy="300" r="30" stroke="#111827" stroke-width="8" fill="none"/>
+  <text x="200" y="308" text-anchor="middle" font-family="serif" font-weight="bold" font-size="24" fill="#111827">VII</text>
+  
+  <!-- Tribal marks -->
+  <path class="wolf-accent" d="M150,170 L140,160 L145,150" stroke="#111827" stroke-width="2" fill="none"/>
+  <path class="wolf-accent" d="M250,170 L260,160 L255,150" stroke="#111827" stroke-width="2" fill="none"/>
+  
+  <!-- Glowing highlights -->
+  <ellipse fill="url(#eyeGlow)" cx="177.5" cy="135" rx="20" ry="16" opacity="0.4"/>
+  <ellipse fill="url(#eyeGlow)" cx="222.5" cy="135" rx="20" ry="16" opacity="0.4"/>
+  
+  <defs>
+    <radialGradient id="eyeGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>
