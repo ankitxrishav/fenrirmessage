@@ -1,6 +1,7 @@
-# check live on https://fenrirmessage.onrender.com
+
 
 # Norse Chat - Hall of Fenrir
+## check live on https://fenrirmessage.onrender.com
 
 A secure, Nordic-themed messaging application with real-time chat functionality, featuring auto-generated warrior names and persistent storage.
 
@@ -21,14 +22,6 @@ A secure, Nordic-themed messaging application with real-time chat functionality,
 - WebSockets for real-time communication
 - Tailwind CSS + Shadcn UI
 - Drizzle ORM
-- Vercel deployment
-
-## Deployment on Vercel
-
-### Prerequisites
-
-1. A PostgreSQL database (recommended: [Neon](https://neon.tech/) for Serverless Postgres)
-2. [Vercel](https://vercel.com/) account
 
 ### Setup Instructions
 
@@ -41,7 +34,7 @@ A secure, Nordic-themed messaging application with real-time chat functionality,
 
 ### Configuration
 
-Make sure to set the following in your Vercel project:
+Make sure to set the following in your project:
 
 - Build Command: `npm run build`
 - Output Directory: `dist`
