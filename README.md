@@ -1,3 +1,5 @@
+# check live on https://fenrirmessage.onrender.com
+
 # Norse Chat - Hall of Fenrir
 
 A secure, Nordic-themed messaging application with real-time chat functionality, featuring auto-generated warrior names and persistent storage.
