@@ -121,13 +121,13 @@ export default function PasswordEntry() {
               
               <FormField
                 control={form.control}
-                name="Enter Random 6 digit password to enter hall"
+                name="password"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
                       <Input
                         type="password"
-                        placeholder="Password"
+                        placeholder="Enter Random 6 digit password to enter hall"
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#7B61FF] focus:border-transparent transition-all shadow-sm text-gray-700"
                         {...field}
                       />
