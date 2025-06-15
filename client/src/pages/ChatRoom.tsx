@@ -139,7 +139,7 @@ export default function ChatRoom() {
         <SystemMessage text={`Today, ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`} />
         
         {/* Show join message for current user */}
-        {connected && <SystemMessage text={`You entered the Hall of Fenrir`} />}
+        {connected && <SystemMessage text={`You entered the Hall of Fenrir share the created password to anyone for Access`} />}
         
         {/* Map user join events */}
         {userJoined.map((user, index) => (
