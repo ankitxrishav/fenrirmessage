@@ -121,7 +121,7 @@ export default function PasswordEntry() {
               
               <FormField
                 control={form.control}
-                name="password"
+                name="Enter Random 6 digit password to enter hall"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
