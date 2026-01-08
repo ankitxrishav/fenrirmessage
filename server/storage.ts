@@ -1,5 +1,5 @@
-import { 
-  users, type User, type InsertUser, 
+import {
+  users, type User, type InsertUser,
   chatRooms, type ChatRoom, type InsertChatRoom,
   messages, type Message, type InsertMessage,
   activeUsers, type ActiveUser, type InsertActiveUser
@@ -34,7 +34,10 @@ export interface IStorage {
   removeActiveUser(roomId: number, username: string): Promise<void>;
   updateActiveUserLastSeen(roomId: number, username: string): Promise<void>;
   cleanupInactiveUsers(timeoutMs: number): Promise<void>;
-  
+
+  // Privacy operations
+  deleteMessagesByRoomId(roomId: number): Promise<void>;
+
   // Session store
   sessionStore: any;
 }
@@ -43,8 +46,8 @@ export class DatabaseStorage implements IStorage {
   sessionStore: any;
 
   constructor() {
-    this.sessionStore = new PostgresSessionStore({ 
-      pool, 
+    this.sessionStore = new PostgresSessionStore({
+      pool,
       createTableIfMissing: true
     });
   }
@@ -103,6 +106,10 @@ export class DatabaseStorage implements IStorage {
     return result[0];
   }
 
+  async deleteMessagesByRoomId(roomId: number): Promise<void> {
+    await db.delete(messages).where(eq(messages.roomId, roomId));
+  }
+
   // Active users operations
   async getActiveUsersByRoomId(roomId: number): Promise<ActiveUser[]> {
     return db.select().from(activeUsers).where(eq(activeUsers.roomId, roomId));
@@ -118,23 +125,23 @@ export class DatabaseStorage implements IStorage {
           eq(activeUsers.username, insertActiveUser.username)
         )
       );
-    
+
     if (existingUsers.length > 0) {
       // Update last seen
       const existingUser = existingUsers[0];
       await db.update(activeUsers)
         .set({ lastSeen: new Date() })
         .where(eq(activeUsers.id, existingUser.id));
-      
+
       return { ...existingUser, lastSeen: new Date() };
     }
-    
+
     // Add new active user
     const result = await db.insert(activeUsers).values({
       ...insertActiveUser,
       lastSeen: new Date()
     }).returning();
-    
+
     return result[0];
   }
 

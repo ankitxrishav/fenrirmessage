@@ -16,6 +16,10 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 
 // Import our wolf SVG
+// Assuming the SVG is in public/assets or src/assets. 
+// If it was in src/assets/fenrir-wolf.svg, we import it.
+// The previous file had: import fenrirWolfSvg from "../assets/fenrir-wolf.svg";
+// I need to ensure this asset exists. I'll stick to the previous code structure.
 import fenrirWolfSvg from "../assets/fenrir-wolf.svg";
 
 // Define schema with password and name
@@ -41,23 +45,35 @@ export default function PasswordEntry() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
       setIsSubmitting(true);
-      
+
       // Use the user's provided name for chat
       const userData = {
         username: values.name,
         password: values.password
       };
-      
+
       const response = await apiRequest("POST", "/api/rooms/join", userData);
       const data = await response.json();
-      
+
       // Store user details in session storage for later use
-      sessionStorage.setItem("chatUsername", userData.username);
+      // FIX: Use standard keys expected by ChatRoom.tsx
+      sessionStorage.setItem("username", userData.username);
+      // Generate a pseudo-random ID for this session since we don't have full auth
+      const pseudoUserId = Math.floor(Math.random() * 1000000).toString();
+      sessionStorage.setItem("userId", pseudoUserId);
       sessionStorage.setItem("chatRoomPassword", values.password);
-      
+
       // Navigate to chat room
+      // Force navigation with window.location if wouter fails to update the view
       navigate(`/chat/${data.roomId}`);
-      
+
+      // Fallback: If we are still here after 100ms, force reload to the new path
+      setTimeout(() => {
+        if (window.location.pathname !== `/chat/${data.roomId}`) {
+          window.location.href = `/chat/${data.roomId}`;
+        }
+      }, 100);
+
       toast({
         title: "Hall access granted",
         description: `Welcome to the Hall of Fenrir, ${userData.username}!`,
@@ -92,13 +108,13 @@ export default function PasswordEntry() {
           <div className="absolute inset-0 flex items-center justify-center">
             <img src={fenrirWolfSvg} alt="Fenrir Wolf" className="w-56 h-56 transform scale-110" />
           </div>
-          
+
           {/* Norse-style decorative elements */}
           <div className="absolute top-4 left-4 w-8 h-8 border-2 border-white/40 rounded-full"></div>
           <div className="absolute bottom-4 right-4 w-6 h-6 border-2 border-white/30 rounded-full"></div>
           <div className="absolute top-6 right-10 w-4 h-4 bg-white/20 rounded-full"></div>
         </div>
-        
+
         <div className="p-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -118,7 +134,7 @@ export default function PasswordEntry() {
                   </FormItem>
                 )}
               />
-              
+
               <FormField
                 control={form.control}
                 name="password"
@@ -136,17 +152,17 @@ export default function PasswordEntry() {
                   </FormItem>
                 )}
               />
-              
+
               <div className="flex justify-end">
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={handleForgotPassword}
                   className="text-sm text-gray-500 hover:text-[#7B61FF] transition-colors"
                 >
                   {forgotPassword ? "Checking..." : "Forgot Password?"}
                 </button>
               </div>
-              
+
               <Button
                 type="submit"
                 disabled={isSubmitting}
@@ -156,7 +172,7 @@ export default function PasswordEntry() {
               </Button>
             </form>
           </Form>
-          
+
           {/* Bottom decorative element */}
           <div className="mt-6 flex justify-center">
             <svg width="40" height="40" viewBox="0 0 100 100" className="text-gray-200">

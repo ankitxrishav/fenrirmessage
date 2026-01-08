@@ -37,6 +37,8 @@ export const messages = pgTable("messages", {
   userId: integer("user_id"),
   username: text("username").notNull(),
   content: text("content").notNull(),
+  type: text("type").notNull().default("text"), // "text" | "image" | "file"
+  filePublicId: text("file_public_id"), // Cloudinary public_id for deletion
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -45,6 +47,8 @@ export const insertMessageSchema = createInsertSchema(messages).pick({
   userId: true,
   username: true,
   content: true,
+  type: true,
+  filePublicId: true,
 });
 
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
@@ -71,6 +75,8 @@ export type ActiveUser = typeof activeUsers.$inferSelect;
 // Message validation schema (for client-side)
 export const messageValidationSchema = z.object({
   content: z.string().min(1, "Message cannot be empty"),
+  type: z.enum(["text", "image", "file"]).default("text"),
+  filePublicId: z.string().optional(),
 });
 
 // Room entry validation schema (for client-side)
@@ -80,7 +86,7 @@ export const roomEntrySchema = z.object({
 });
 
 // WebSocket message types
-export type ChatEvent = 
+export type ChatEvent =
   | { type: "join"; roomId: number; user: { id?: number; username: string } }
   | { type: "leave"; roomId: number; user: { id?: number; username: string } }
   | { type: "message"; roomId: number; message: Message }

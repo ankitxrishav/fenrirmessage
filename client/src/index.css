@@ -2,132 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: 210 20% 98%;
-  --foreground: 215 25% 15%;
-  --muted: 205 20% 95%;
-  --muted-foreground: 215 15% 45%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 215 25% 15%;
-  --card: 0 0% 100%;
-  --card-foreground: 215 25% 15%;
-  --border: 215 16% 90%;
-  --input: 215 16% 90%;
-  --primary: 210 80% 42%;  /* Nordic blue - #1A56DB */
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 20% 95%;
-  --secondary-foreground: 215 25% 15%;
-  --accent: 220 70% 45%;   /* Rich blue with hint of purple */
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 75% 50%;
-  --destructive-foreground: 210 40% 98%;
-  --ring: 215 25% 15%;
-  --radius: 0.5rem;
-  
-  --primary-light: 210 90% 95%;  /* Light blue */
-  --gray-dark: 215 30% 20%;  /* Deep slate for text */
-  --fenrir-gray: 220 14% 22%; /* Wolf gray */
-  --fenrir-blue: 205 82% 33%; /* Norse mythology inspired blue */
-}
+@layer base {
+  :root {
+    /* "Modern Minimal Chat App" Theme */
+    --background: 220 20% 10%; /* Deep charcoal/soft black */
+    --foreground: 210 20% 98%;
 
-.dark {
-  --background: 240 10% 3.9%;
-  --foreground: 0 0% 98%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --popover: 240 10% 3.9%;
-  --popover-foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
-  --card-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --primary: 245 57% 58%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 240 3.7% 15.9%;
-  --secondary-foreground: 0 0% 98%;
-  --accent: 260 61% 58%;
-  --accent-foreground: 0 0% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 0 0% 98%;
-  --ring: 240 4.9% 83.9%;
-  --radius: 0.5rem;
+    --card: 220 20% 14%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 190 80% 60%; /* Cyan/Electric Blue Accent */
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 15% 20%; /* Muted Dark Gray for other messages */
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 220 15% 25%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 260 60% 60%; /* Soft Purple */
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 190 80% 60%;
+
+    --radius: 1rem;
+  }
 }
 
 @layer base {
   * {
     @apply border-border;
   }
-
   body {
-    @apply font-sans antialiased bg-gray-50 text-foreground;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  h1, h2, h3 {
-    font-family: 'Cinzel', serif;
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', sans-serif;
   }
 }
 
-/* Custom scrollbar styles */
-.messages-container {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(13, 75, 148, 0.3) transparent;
+/* Animations from Master Prompt */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.messages-container::-webkit-scrollbar {
-  width: 6px;
+.animate-message {
+  animation: fadeInSlideUp 0.3s ease-out forwards;
 }
 
-.messages-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.messages-container::-webkit-scrollbar-thumb {
-  background-color: rgba(13, 75, 148, 0.3);
-  border-radius: 20px;
-}
-
-/* Animation keyframes */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes typing {
-  0% { opacity: 0.4; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-4px); }
-  100% { opacity: 0.4; transform: translateY(0); }
-}
-
-/* Animation classes */
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.animate-slide-up {
-  animation: slideUp 0.3s ease-out;
-}
-
-@keyframes slideUp {
-  0% { transform: translateY(10px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
-}
-
-.message {
-  max-width: 80%;
-  animation: fadeIn 0.3s ease-out;
-}
-
-/* Typing indicator animation */
-.typing-indicator span {
-  animation: typing 1.4s infinite both;
-}
-
-.typing-indicator span:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.typing-indicator span:nth-child(3) {
-  animation-delay: 0.4s;
+/* Glassmorphism utility */
+.glass {
+  background: rgba(30, 35, 45, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
