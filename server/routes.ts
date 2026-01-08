@@ -10,7 +10,7 @@ cloudinary.config({
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { WebSocketServer, WebSocket } from "ws";
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 import {
   ChatEvent,
   insertMessageSchema,
