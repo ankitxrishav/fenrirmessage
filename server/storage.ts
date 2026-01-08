@@ -3,11 +3,11 @@ import {
   chatRooms, type ChatRoom, type InsertChatRoom,
   messages, type Message, type InsertMessage,
   activeUsers, type ActiveUser, type InsertActiveUser
-} from "@shared/schema";
-import { db } from "./db";
+} from "../shared/schema.js";
+import { db } from "./db.js";
 import { eq, and, lt, desc, asc } from "drizzle-orm";
 import connectPg from "connect-pg-simple";
-import { pool } from "./db";
+import { pool } from "./db.js";
 import session from "express-session";
 
 const PostgresSessionStore = connectPg(session);

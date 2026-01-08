@@ -16,7 +16,7 @@ import {
   insertMessageSchema,
   insertActiveUserSchema,
   roomEntrySchema
-} from "@shared/schema";
+} from "../shared/schema.js";
 import { z } from "zod";
 
 // WebSocket connections map by room
