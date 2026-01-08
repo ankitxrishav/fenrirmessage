@@ -1,6 +1,6 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes.js";
-import { setupVite, serveStatic, log } from "./vite.js";
+import { serveStatic } from "./vite.js";
 
 const app = express();
 
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
       if (logLine.length > 80) logLine = logLine.slice(0, 79) + "…";
-      log(logLine);
+      console.log(logLine);
     }
   });
 
@@ -47,7 +47,8 @@ async function init() {
     res.status(status).json({ message });
   });
 
-  if (app.get("env") === "development") {
+  if (process.env.NODE_ENV !== "production") {
+    const { setupVite } = await import("./vite-dev.js");
     await setupVite(app, server);
   } else {
     serveStatic(app);
